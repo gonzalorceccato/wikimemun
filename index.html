@@ -54,6 +54,8 @@
   .buscador input::placeholder{color:#5b7c8a;}
   .buscador button{padding:8px 15px;border:1px solid var(--acero);background:var(--acero);color:var(--niebla);border-radius:0 1px 1px 0;cursor:pointer;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.78rem;}
   .buscador button:hover{background:var(--acero-claro);}
+  .topbar a.btn-crear{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.78rem;background:var(--anomalia-viva);color:#fff;padding:9px 16px;border:1px solid var(--anomalia);border-radius:1px;white-space:nowrap;}
+  .topbar a.btn-crear:hover{background:var(--anomalia);color:#fff;text-decoration:none;}
   .usuario{display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;white-space:nowrap;letter-spacing:.5px;}
 
   .contenedor{display:flex;align-items:flex-start;max-width:1180px;margin:0 auto;}
@@ -148,6 +150,7 @@
     <input type="search" placeholder="Buscar en el archivo" aria-label="Buscar en el archivo">
     <button type="submit">Buscar</button>
   </form>
+  <a class="btn-crear" href="formulario.html">Crear entrada</a>
   <nav class="usuario" aria-label="Acceso">
     <a href="#">Solicitar acceso</a>
     <a href="#">Ingresar</a>
