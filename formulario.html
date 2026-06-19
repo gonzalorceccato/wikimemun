@@ -123,26 +123,27 @@
 
   <!-- ===== Formulario ===== -->
   <form id="form-entrada" novalidate>
-    <div class="form-head">Ingreso de objeto de memoria</div>
+    <div class="form-head">Ingreso de registro de memoria</div>
     <div class="form-body">
-
-      <div class="campo">
-        <label for="nombre">Nombre del objeto <span class="req">*</span></label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ej.: Dinosaurio rojo" required>
-        <p class="hint">Identificador con el que se mostrará la entrada.</p>
-      </div>
 
       <div class="fila">
         <div class="campo">
-          <label for="clasificacion">Clasificación</label>
-          <select id="clasificacion" name="clasificacion">
-            <option>Objeto de memoria residual</option>
-            <option>Fragmento emocional</option>
-            <option>Recuerdo recuperado</option>
-            <option>Anomalía persistente</option>
-            <option>Registro neutralizado</option>
+          <label for="nombre">Nombre <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej.: Dragón rojo" required>
+          <p class="hint">Identificador con el que se mostrará la entrada.</p>
+        </div>
+        <div class="campo">
+          <label for="tipo">Tipo</label>
+          <select id="tipo" name="tipo">
+            <option>Objeto</option>
+            <option>Anomalía</option>
+            <option>Recuerdo</option>
+            <option>Personaje</option>
           </select>
         </div>
+      </div>
+
+      <div class="fila">
         <div class="campo">
           <label for="anomalia">Nivel de anomalía</label>
           <select id="anomalia" name="anomalia">
@@ -152,13 +153,6 @@
             <option>Crítico</option>
           </select>
         </div>
-      </div>
-
-      <div class="fila">
-        <div class="campo">
-          <label for="sujeto">Sujeto vinculado <span class="req">*</span></label>
-          <input type="text" id="sujeto" name="sujeto" placeholder="Ej.: Luz" required>
-        </div>
         <div class="campo">
           <label for="estado">Estado del registro</label>
           <select id="estado" name="estado">
@@ -167,6 +161,11 @@
             <option>En revisión</option>
           </select>
         </div>
+      </div>
+
+      <div class="campo">
+        <label for="sujeto">Sujeto vinculado <span class="req">*</span></label>
+        <input type="text" id="sujeto" name="sujeto" placeholder="Ej.: Luz" required>
       </div>
 
       <div class="campo">
@@ -235,7 +234,7 @@
       var nombre = document.getElementById('nombre').value.trim();
       var sujeto = document.getElementById('sujeto').value.trim();
       var desc   = document.getElementById('descripcion').value.trim();
-      var clasif = document.getElementById('clasificacion').value;
+      var clasif = document.getElementById('tipo').value;
       var anom   = document.getElementById('anomalia').value;
       var estado = document.getElementById('estado').value;
 
@@ -247,7 +246,7 @@
       eco.innerHTML =
         'OBJETO:        <b>' + escapar(nombre) + '</b><br>' +
         'SUJETO:        <b>' + escapar(sujeto) + '</b><br>' +
-        'CLASIFICACIÓN: ' + escapar(clasif) + '<br>' +
+        'TIPO:          ' + escapar(clasif) + '<br>' +
         'ANOMALÍA:      ' + escapar(anom) + '<br>' +
         'ESTADO:        ' + escapar(estado);
 
