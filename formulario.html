@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear entrada — WikiMEMUN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tinta:#0f2129;
+    --acero:#2f5060;
+    --acero-claro:#5b7c8a;
+    --niebla:#e9e6dd;
+    --niebla-2:#f3f1ea;
+    --linea:#c4c8c2;
+    --linea-fuerte:#9aa6a3;
+    --anomalia:#8f2a20;
+    --anomalia-viva:#b8392b;
+    --tenue:#62757a;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:15px;}
+  body{
+    margin:0;
+    font-family:'Spectral',Georgia,serif;
+    color:var(--tinta);
+    background-color:var(--niebla);
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(255,255,255,.55), transparent 45%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    line-height:1.62;
+  }
+  a{color:var(--acero);text-decoration:none;}
+  a:hover{color:var(--tinta);text-decoration:underline;}
+  a:focus-visible{outline:2px solid var(--anomalia);outline-offset:2px;}
+
+  .topbar{background:var(--tinta);color:var(--niebla);display:flex;align-items:center;gap:20px;padding:10px 20px;flex-wrap:wrap;border-bottom:3px solid var(--anomalia);}
+  .topbar a{color:var(--niebla);}
+  .marca{display:flex;align-items:center;gap:13px;text-decoration:none;}
+  .marca:hover{text-decoration:none;}
+  .logo-m{height:48px;width:auto;flex:0 0 auto;display:block;}
+  .wordmark{display:flex;flex-direction:column;line-height:1;}
+  .wordmark b{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.7rem;letter-spacing:1px;text-transform:uppercase;}
+  .wordmark b span{color:var(--acero-claro);font-weight:300;}
+  .wordmark small{font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--acero-claro);margin-top:5px;}
+  .topbar .volver{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.5px;white-space:nowrap;}
+
+  .wrap{max-width:760px;margin:0 auto;padding:30px 22px 60px;}
+  .encabezado{border-bottom:1px solid var(--linea-fuerte);padding-bottom:10px;margin-bottom:8px;}
+  h1{font-family:'Oswald',sans-serif;font-weight:500;font-size:2rem;letter-spacing:.5px;margin:0;}
+  .sub{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--tenue);letter-spacing:.5px;margin:6px 0 0;}
+  .intro{margin:14px 0 24px;color:var(--acero);}
+
+  form{background:var(--niebla-2);border:1px solid var(--linea-fuerte);}
+  .form-head{background:var(--tinta);color:var(--niebla);font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:2px;font-size:.82rem;padding:11px 18px;border-bottom:1px solid var(--acero);}
+  .form-body{padding:22px 22px 8px;}
+  .campo{margin-bottom:18px;}
+  .fila{display:flex;gap:18px;}
+  .fila .campo{flex:1;}
+  label{display:block;font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.74rem;color:var(--acero);margin-bottom:6px;}
+  label .req{color:var(--anomalia-viva);}
+  .hint{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--tenue);margin:5px 0 0;}
+  input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--linea-fuerte);background:#fff;color:var(--tinta);font-family:'Spectral',serif;font-size:.95rem;border-radius:1px;}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--acero-claro);outline-offset:0;border-color:var(--acero);}
+  textarea{min-height:110px;resize:vertical;line-height:1.55;}
+  select{font-family:'IBM Plex Mono',monospace;font-size:.84rem;}
+
+  .acciones{display:flex;align-items:center;gap:16px;padding:6px 22px 22px;flex-wrap:wrap;}
+  .btn-enviar{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:.86rem;background:var(--anomalia-viva);color:#fff;border:1px solid var(--anomalia);padding:11px 26px;border-radius:1px;cursor:pointer;}
+  .btn-enviar:hover{background:var(--anomalia);}
+  .btn-limpiar{font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--tenue);background:none;border:none;cursor:pointer;text-decoration:underline;}
+
+  .aviso{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--tenue);background:rgba(47,80,96,.08);border:1px solid var(--linea-fuerte);padding:9px 13px;margin:16px 0 0;}
+
+  /* confirmación */
+  .confirmacion{display:none;background:var(--tinta);color:var(--niebla);border:1px solid var(--acero);border-left:4px solid var(--anomalia-viva);padding:26px 26px 30px;}
+  .confirmacion.activa{display:block;animation:aparece .5s ease;}
+  .confirmacion .estado{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:2px;color:var(--anomalia-viva);text-transform:uppercase;}
+  .confirmacion h2{font-family:'Oswald',sans-serif;font-weight:500;font-size:1.5rem;letter-spacing:.5px;margin:8px 0 14px;color:var(--niebla);}
+  .confirmacion p{margin:0 0 12px;color:#c8d4d6;}
+  .confirmacion .eco{font-family:'IBM Plex Mono',monospace;font-size:.78rem;background:#0a181e;border:1px solid var(--acero);padding:12px 14px;margin:14px 0;color:var(--acero-claro);}
+  .confirmacion .eco b{color:var(--niebla);}
+  .confirmacion .demo{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--tenue);margin-top:16px;}
+  .confirmacion a.otra{display:inline-block;margin-top:8px;color:var(--anomalia-viva);font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;font-size:.78rem;}
+
+  @keyframes aparece{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  footer{background:var(--tinta);color:var(--acero-claro);margin-top:34px;padding:24px 22px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.5px;}
+  footer .links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:12px;}
+  footer a{color:var(--niebla);}
+  footer p{margin:5px 0;line-height:1.5;}
+  footer .tagline{font-family:'Oswald',sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--anomalia-viva);margin-top:10px;}
+
+  @media(max-width:620px){
+    .fila{flex-direction:column;gap:0;}
+    .topbar .volver{order:3;width:100%;text-align:right;margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="marca" href="index.html">
+    <img class="logo-m" src="data:image/png;base64,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" alt="Logo de MEMUN" aria-hidden="true">
+    <span class="wordmark">
+      <b><span>Wiki</span>MEMUN</b>
+      <small>Editor de memorias</small>
+    </span>
+  </a>
+  <a class="volver" href="index.html">← Volver al archivo</a>
+</header>
+
+<div class="wrap">
+
+  <div class="encabezado">
+    <h1>Crear entrada</h1>
+    <p class="sub">Formulario de ingreso · Archivo interno de MEMUN</p>
+  </div>
+  <p class="intro">Complete los campos para registrar un nuevo objeto en el archivo. El sistema
+  evaluará su nivel de anomalía antes de cualquier intervención sobre la memoria del sujeto.</p>
+
+  <!-- ===== Formulario ===== -->
+  <form id="form-entrada" novalidate>
+    <div class="form-head">Ingreso de objeto de memoria</div>
+    <div class="form-body">
+
+      <div class="campo">
+        <label for="nombre">Nombre del objeto <span class="req">*</span></label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej.: Dinosaurio rojo" required>
+        <p class="hint">Identificador con el que se mostrará la entrada.</p>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="clasificacion">Clasificación</label>
+          <select id="clasificacion" name="clasificacion">
+            <option>Objeto de memoria residual</option>
+            <option>Fragmento emocional</option>
+            <option>Recuerdo recuperado</option>
+            <option>Anomalía persistente</option>
+            <option>Registro neutralizado</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="anomalia">Nivel de anomalía</label>
+          <select id="anomalia" name="anomalia">
+            <option>Bajo / transitorio</option>
+            <option selected>Medio / persistente</option>
+            <option>Alto / persistente</option>
+            <option>Crítico</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fila">
+        <div class="campo">
+          <label for="sujeto">Sujeto vinculado <span class="req">*</span></label>
+          <input type="text" id="sujeto" name="sujeto" placeholder="Ej.: Luz" required>
+        </div>
+        <div class="campo">
+          <label for="estado">Estado del registro</label>
+          <select id="estado" name="estado">
+            <option>Completo</option>
+            <option selected>Incompleto</option>
+            <option>En revisión</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="descripcion">Descripción del objeto <span class="req">*</span></label>
+        <textarea id="descripcion" name="descripcion" placeholder="Describa el objeto: aspecto, función para el sujeto, recuerdos que activa..." required></textarea>
+      </div>
+
+      <div class="campo">
+        <label for="interpretacion">Interpretación no oficial</label>
+        <textarea id="interpretacion" name="interpretacion" placeholder="Opcional: lectura simbólica o emocional del objeto."></textarea>
+        <p class="hint">No será considerada por el sistema, pero queda registrada.</p>
+      </div>
+
+    </div>
+
+    <div class="acciones">
+      <button type="submit" class="btn-enviar">Enviar al archivo</button>
+      <button type="reset" class="btn-limpiar">Limpiar campos</button>
+    </div>
+  </form>
+
+  <!-- ===== Confirmación (simulada) ===== -->
+  <div class="confirmacion" id="confirmacion" role="status" aria-live="polite">
+    <div class="estado">● Registro recibido</div>
+    <h2>La entrada ha sido enviada al archivo</h2>
+    <p>MEMUN ha recibido el objeto y lo ha incorporado al archivo del sujeto. Su nivel de anomalía
+    será evaluado antes de cualquier intervención.</p>
+    <div class="eco" id="eco"></div>
+    <p>Algunos objetos resisten la edición de memoria. Este registro queda bajo observación.</p>
+    <a class="otra" href="#" id="otra-entrada">+ Registrar otra entrada</a>
+    <p class="demo">Registro de demostración — los datos no se envían a ningún servidor.</p>
+  </div>
+
+  <p class="aviso">Esta es una página de demostración dentro de una obra de ficción transmedia. El
+  formulario no almacena ni transmite información.</p>
+
+</div>
+
+<footer>
+  <div class="links">
+    <a href="index.html">Volver al archivo</a>
+    <a href="#">Acerca de MEMUN</a>
+    <a href="#">Protocolo de borrado</a>
+    <a href="#">Política de memoria</a>
+  </div>
+  <p>Registro generado por el archivo interno de MEMUN. Contenido sujeto a edición sin previo aviso.</p>
+  <p>WikiMEMUN es una obra de ficción transmedia. MEMUN, Luz y el dinosaurio rojo son elementos narrativos.</p>
+  <p class="tagline">Olvidar es sanar</p>
+</footer>
+
+<script>
+  (function(){
+    var form = document.getElementById('form-entrada');
+    var conf = document.getElementById('confirmacion');
+    var eco  = document.getElementById('eco');
+    var otra = document.getElementById('otra-entrada');
+
+    function escapar(t){
+      var d = document.createElement('div');
+      d.textContent = t;
+      return d.innerHTML;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var nombre = document.getElementById('nombre').value.trim();
+      var sujeto = document.getElementById('sujeto').value.trim();
+      var desc   = document.getElementById('descripcion').value.trim();
+      var clasif = document.getElementById('clasificacion').value;
+      var anom   = document.getElementById('anomalia').value;
+      var estado = document.getElementById('estado').value;
+
+      if(!nombre || !sujeto || !desc){
+        alert('Complete los campos obligatorios (*) antes de enviar.');
+        return;
+      }
+
+      eco.innerHTML =
+        'OBJETO:        <b>' + escapar(nombre) + '</b><br>' +
+        'SUJETO:        <b>' + escapar(sujeto) + '</b><br>' +
+        'CLASIFICACIÓN: ' + escapar(clasif) + '<br>' +
+        'ANOMALÍA:      ' + escapar(anom) + '<br>' +
+        'ESTADO:        ' + escapar(estado);
+
+      form.style.display = 'none';
+      conf.classList.add('activa');
+      conf.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    otra.addEventListener('click', function(e){
+      e.preventDefault();
+      form.reset();
+      conf.classList.remove('activa');
+      form.style.display = '';
+      form.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  })();
+</script>
+
+</body>
+</html>
